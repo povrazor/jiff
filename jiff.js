@@ -2,26 +2,45 @@
 /** @author Brian Cavalier */
 /** @author John Hann */
 
-var lcs = require('./lib/lcs');
-var array = require('./lib/array');
-var patch = require('./lib/jsonPatch');
-var inverse = require('./lib/inverse');
-var jsonPointer = require('./lib/jsonPointer');
+import lcs from './lib/lcs';
+import array from './lib/array';
+import _patch from './lib/jsonPatch';
+import inverse from './lib/inverse';
+import jsonPointer from './lib/jsonPointer';
 var encodeSegment = jsonPointer.encodeSegment;
-
-exports.diff = diff;
-exports.patch = patch.apply;
-exports.patchInPlace = patch.applyInPlace;
-exports.inverse = inverse;
-exports.clone = patch.clone;
+var patch = _patch.apply;
+var patchInPlace = _patch.applyInPlace;
+var clone = _patch.clone;
 
 // Errors
-exports.InvalidPatchOperationError = require('./lib/InvalidPatchOperationError');
-exports.TestFailedError = require('./lib/TestFailedError');
-exports.PatchNotInvertibleError = require('./lib/PatchNotInvertibleError');
+import InvalidPatchOperationError from './lib/InvalidPatchOperationError';
+import TestFailedError from './lib/TestFailedError';
+import PatchNotInvertibleError from './lib/PatchNotInvertibleError';
 
-var isValidObject = patch.isValidObject;
-var defaultHash = patch.defaultHash;
+export default {
+	diff,
+	patch,
+	patchInPlace,
+	inverse,
+	clone,
+	InvalidPatchOperationError,
+	TestFailedError,
+	PatchNotInvertibleError
+};
+
+export {
+	diff,
+	patch,
+	patchInPlace,
+	inverse,
+	clone,
+	InvalidPatchOperationError,
+	TestFailedError,
+	PatchNotInvertibleError
+};
+
+var isValidObject = _patch.isValidObject;
+var defaultHash = _patch.defaultHash;
 
 /**
  * Compute a JSON Patch representing the differences between a and b.
